@@ -1,0 +1,17 @@
+asgiref>=3.11.1
+Django
+djangorestframework
+djangorestframework_simplejwt>=5.5.1
+drf-yasg>=1.21.14
+inflection>=0.5.1
+ldap3>=2.9.1
+packaging>=26.0
+pyasn1>=0.6.2
+PyJWT>=2.11.0
+python-dotenv>=1.2.1
+pytz>=2025.2
+PyYAML>=6.0.3
+sqlparse>=0.5.5
+uritemplate>=4.2.0
+psycopg2-binary>=2.9.9
+django-cors-headers>=4.9.0
