@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Employee, OutTransferLog
 from .ad_service import ADService
 from drf_yasg.utils import swagger_serializer_method
-from drf_yasg import openapi
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -25,19 +24,7 @@ class EmployeeDetailSerializer(serializers.ModelSerializer):
             'ad_username', 'is_active', 'created_at', 'updated_at',
             'ad_info'
         ]
-    
-    @swagger_serializer_method(serializer_or_field=openapi.Schema(
-        type=openapi.TYPE_OBJECT,
-        properties={
-            'cn': openapi.Schema(type=openapi.TYPE_STRING),
-            'email': openapi.Schema(type=openapi.TYPE_STRING),
-            'phone': openapi.Schema(type=openapi.TYPE_STRING),
-            'ou': openapi.Schema(type=openapi.TYPE_STRING),
-            'distinguished_name': openapi.Schema(type=openapi.TYPE_STRING),
-            'department': openapi.Schema(type=openapi.TYPE_STRING),
-            'title': openapi.Schema(type=openapi.TYPE_STRING),
-        }
-    ))
+
     def get_ad_info(self, obj):
         try:
             ad_service = ADService()
@@ -51,7 +38,7 @@ class OutTransferLogSerializer(serializers.ModelSerializer):
     employee_name = serializers.CharField(source='employee.full_en_name', read_only=True)
     class Meta:
         model = OutTransferLog
-        fields = ["employee", "employee_name", "from_ou", "to_ou", "transferred_by", "transfer_date", "note"]
+        fields = ["employee", "employee_name", "from_ou", "to_ou", "tranferred_by", "transfer_date", "note"]
 
 
 class LoginSerializer(serializers.Serializer):
