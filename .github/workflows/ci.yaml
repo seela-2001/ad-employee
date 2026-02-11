@@ -8,14 +8,14 @@ on:
 
 jobs:
   Build & Push AD project:
-     runs_on: ubuntu_latest
+    runs_on: ubuntu_latest
 
-     steps:
-       - name: Cheking Repository
-         uses: actions/checkout@v6.0.2
+    steps:
+      - name: Cheking Repository
+        uses: actions/checkout@v6.0.2
 
-      - name: Docker Detup Buildx
-        uses: docker/setup-buildx-action@v3.12.0
+    - name: Docker Detup Buildx
+      uses: docker/setup-buildx-action@v3.12.0
 
-      - name: Down containers
-        run: docker compose down
+    - name: Down containers
+      run: docker compose down
