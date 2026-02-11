@@ -376,5 +376,3 @@ class OUTransferLogViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(employee__employee_id=employee_id)
         
         return queryset
-
-

@@ -13,7 +13,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 
 class EmployeeDetailSerializer(serializers.ModelSerializer):
-    """Detailed employee serializer with AD info"""
+
     ad_info = serializers.SerializerMethodField()
     
     class Meta:
