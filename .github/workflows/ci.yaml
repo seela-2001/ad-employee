@@ -23,3 +23,9 @@ jobs:
 
       - name: Down containers
         run: docker compose down
+
+      - name: Build image
+        run: docker compose build
+
+      - name: Up containers
+        run: docker compose up -d
