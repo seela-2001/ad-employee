@@ -7,7 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  Build & Push AD project:
+  build-and-push-ad-project:
+    name: build and push image
     runs_on: ubuntu_latest
 
     steps:
