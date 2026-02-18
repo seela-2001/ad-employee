@@ -1,4 +1,18 @@
 services:
+  ad-dc:
+    image: linuxcrafts/samba-ad-dc:latest
+    container_name: samba-ad-dc
+    cap_add:
+      - SYS_ADMIN
+    environment:
+      - DNS_DOMAIN=EXAMPLE.LOCAL
+      - ADMIN_PASSWORD=YourStrongPass
+    ports:
+      - "389:389" 
+      - "636:636" 
+      - "53:53/udp" 
+    volumes:
+      - samba-data:/samba
   db:
     image: postgres:15-alpine
     container_name: ad-integration-db
@@ -20,6 +34,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - ad-dc
     networks:
       - backend-network
 
@@ -30,3 +45,4 @@ networks:
 
 volumes:
   postgres_data:
+  samba-data:

@@ -1,10 +1,16 @@
 FROM python:3.12-slim
 
+
 WORKDIR /app
-# Install system dependencies for SQL Server ODBC driver and debugging tools
+
+
 RUN apt-get update && apt-get install -y \
-    curl \
-    gnupg2
+    gcc \
+    libsasl2-dev \
+    libldap2-dev \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 
 COPY requirements.txt .
 
