@@ -64,6 +64,8 @@ MIDDLEWARE = [
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -186,12 +188,12 @@ SWAGGER_SETTINGS = {
 }
 
 import ldap
-from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
+from django_auth_ldap.config import LDAPSearch
 
-AUTH_LDAP_SERVER_URI = "ldap://ad-dc:389"
-
-AUTH_LDAP_BIND_DN = "CN=Administrator,CN=Users,DC=example,DC=local"
+AUTH_LDAP_SERVER_URI = os.getenv("AD_SERVER", "ldap://ad-dc")
+AUTH_LDAP_BIND_DN = os.getenv("AUTH_LDAP_BIND_DN", "CN=Administrator,CN=Users,DC=example,DC=local")
 AUTH_LDAP_BIND_PASSWORD = os.getenv("AUTH_LDAP_BIND_PASSWORD")
+
 AUTH_LDAP_USER_SEARCH = LDAPSearch(
     "DC=example,DC=local",
     ldap.SCOPE_SUBTREE,
@@ -202,4 +204,3 @@ AUTHENTICATION_BACKENDS = (
     'django_auth_ldap.backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-

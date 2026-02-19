@@ -5,14 +5,16 @@ services:
     cap_add:
       - SYS_ADMIN
     environment:
-      - DNS_DOMAIN=EXAMPLE.LOCAL
-      - ADMIN_PASSWORD=YourStrongPass
+      - DNS_DOMAIN=example.local
+      - ADMIN_PASSWORD=Admin@1234!
     ports:
-      - "389:389" 
-      - "636:636" 
-      - "53:53/udp" 
+      - "389:389"
+      - "636:636"
     volumes:
       - samba-data:/samba
+    networks:
+      - backend-network
+
   db:
     image: postgres:15-alpine
     container_name: ad-integration-db
@@ -21,8 +23,8 @@ services:
     ports:
       - "5435:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/ddata
-    networks: 
+      - postgres_data:/var/lib/postgresql/data
+    networks:
       - backend-network
 
   backend:
@@ -37,7 +39,6 @@ services:
       - ad-dc
     networks:
       - backend-network
-
 
 networks:
   backend-network:

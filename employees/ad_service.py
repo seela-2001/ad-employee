@@ -7,15 +7,16 @@ load_dotenv()
 
 class ADService:
     def __init__(self):
-        self.server_address = os.getenv('AD_SERVER', default='eissa.local')
-        self.domain = os.getenv('AD_DOMAIN', default='EISSA')
-        self.base_dn = 'DC=eissa,DC=local'
+        self.server_address = os.getenv('AD_SERVER', default='ldap://ad-dc')
+        self.domain = os.getenv('AD_DOMAIN', default='EXAMPLE')
+        self.base_dn = 'DC=example,DC=local'
         
     def get_connection(self, username, password):
-        """Create LDAP connection"""
         try:
             server = Server(self.server_address, port=389, get_info=ALL)
-            user_dn = f'{self.domain}\\{username}'
+            
+            # Try UPN format instead of DOMAIN\username
+            user_dn = f'{username}@{self.domain.lower()}.local'
             conn = Connection(server, user=user_dn, password=password)
             
             if conn.bind():
